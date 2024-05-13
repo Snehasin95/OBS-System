@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>OBS Network Detecting Application</title>
+  <style>
+    body {
+    background-size: cover;
+    background-position: center;
+    font-family: Arial, sans-serif;
+    font-weight: bold;
+    color: rgb(252, 252, 252);
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.5); /* Transparent white background */
+}
+   .container {
+    max-width: 1300px;
+    max-height: 700px;
+    margin: 0 auto;
+    text-align: center;
+    background-color: #f7f4f4;
+    padding: 20px;
+    border-radius: 0px;
+    box-shadow: 0 4px 8px rgba(224, 197, 197, 0.575);
+    /* Set background image */
+    background-image: url('https://pixahive.com/wp-content/uploads/2020/09/hacker-hacking-networks-67435-pixahive.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
+.container h1 {
+    text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.5); /* Add white box shadow behind text */
+}
+    .login {
+      background-image: url('https://pixahive.com/wp-content/uploads/2020/09/hacker-hacking-networks-67435-pixahive.jpg');
+      padding: 20px;
+      border-radius: 10px;
+      margin: 0 auto;
+      width: 1300%; /* Updated width */
+      max-width: 1300px; /* Updated max-width */
+      box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5);
+    }
+    
+    .login h1 {
+      font-size: 32px;
+      margin-bottom: 20px;
+      color: #d9ff00; /* Updated title color */
+    }
+    
+    .login input, .login select {
+      width: calc(100% - 22px); /* Adjusted input width */
+      padding: 10px;
+      margin-bottom: 10px;
+      border-radius: 5px;
+      border: 1px solid #121213; /* Updated border color */
+    }
+    
+    .btn {
+      width: 100%;
+      padding: 10px;
+      border-radius: 5px;
+      border: none;
+      cursor: pointer;
+    }
+    
+    .btn-primary {
+      background-color: #00b7ff;
+      color: rgb(8, 8, 8);
+    }
+    
+    .btn-primary:hover {
+      background-color: #009eb3;
+    }
+    
+    .prediction {
+      margin-top: 30px;
+    }
+    .added-image {
+            margin-top: 20px;
+            width: 100%; /* Make the image fill the full page */
+        }
+    .image-label {
+            position: absolute;
+            top: calc(260% + 20px);
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: rgba(255, 255, 255, 0.6); /* Semi-transparent white background */
+            padding: 10px;
+            border-radius: 10px;
+            font-size: 20px;
+            color: #333;
+            width: 90%; /* Adjust as needed */
+            max-width: 200px; /* Adjust as needed */
+        }
+
+  </style>
+</head>
+<body>
+  <div class="login">
+    <h1>OBS Network Detection</h1>
+
+    <!-- Main Input For Receiving Query to our ML -->
+    <form action="{{ url_for('predict')}}" method="post">
+
+          <label for="Node">Node:</label>
+            <input type="number" name="Node" placeholder="Node" step="any" required="required" />
+            
+            <label for="Utilised_Bandwith_Rate">Utilised Bandwith Rate:</label>
+            <input type="number" name="Utilised_Bandwith_Rate" placeholder="Utilised Bandwith Rate"  step="any" required="required" />
+            
+            <label for="Packet_Drop_Rate">Packet Drop Rate:</label>
+            <input type="number" name="Packet_Drop_Rate" placeholder="Packet Drop Rate" step="any" required="required" />
+            
+            <label for="Full_Bandwidth">Full Bandwidth:</label>
+            <input type="number" name="Full_Bandwidth" placeholder="Full Bandwidth" required="required" />
+            
+            <label for="Average_Delay_Time_Per_Sec">Average Delay Time Per Sec:</label>
+            <input type="number" name="Average_Delay_Time_Per_Sec" placeholder="Average Delay Time Per Sec" step="any" required="required" />
+            
+            <label for="Percentage_Of_Lost_Pcaket_Rate">Percentage Of Lost Packet Rate:</label>
+            <input type="number" name="Percentage_Of_Lost_Pcaket_Rate" placeholder="Percentage Of Lost Packet Rate" step="any" required="required" />
+            
+            <label for="Percentage_Of_Lost_Byte_Rate">Percentage Of Lost Byte Rate:</label>
+            <input type="number" name="Percentage_Of_Lost_Byte_Rate" placeholder="Percentage Of Lost Byte Rate" step="any" required="required" />
+            
+            <label for="Packet_Received_Rate">Packet Received Rate:</label>
+            <input type="number" name="Packet_Received_Rate" placeholder="Packet Received Rate" step="any" required="required" />
+            
+            <label for="Of_Used_Bandwidth">Of Used Bandwidth:</label>
+            <input type="number" name="Of_Used_Bandwidth" placeholder="Of Used Bandwidth" step="any" required="required" />
+            
+            <label for="Lost_Bandwidth">Lost Bandwidth:</label>
+            <input type="number" name="Lost_Bandwidth" placeholder="Lost Bandwidth" step="any" required="required" />
+            
+            <label for="Packet_Size_Byte">Packet Size Byte:</label>
+            <input type="number" name="Packet_Size_Byte" placeholder="Packet Size Byte" required="required" />
+            
+            <label for="Packet_Transmitted">Packet Transmitted:</label>
+            <input type="number" name="Packet_Transmitted" placeholder="Packet Transmitted" step="any" required="required" />
+            
+            <label for="Packet_Received">Packet Received:</label>
+            <input type="number" name="Packet_Received" placeholder="Packet Received" required="required" />
+            
+            <label for="Packet_lost">Packet lost:</label>
+            <input type="number" name="Packet_lost" placeholder="Packet lost" required="required" />
+            
+            <label for="Transmitted_Byte">Transmitted Byte:</label>
+            <input type="number" name="Transmitted_Byte" placeholder="Transmitted Byte" required="required" />
+            
+            <label for="Received_Byte">Received Byte:</label>
+            <input type="number" name="Received_Byte" placeholder="Received Byte" required="required" />
+            
+            <label for="10-Run-AVG-Drop-Rate">10-Run-AVG-Drop-Rate:</label>
+            <input type="number" name="10-Run-AVG-Drop-Rate" placeholder="10-Run-AVG-Drop-Rate" step="any" required="required" />
+            
+            <label for="10-Run-AVG-Bandwith-Use">10-Run-AVG-Bandwith-Use:</label>
+            <input type="number" name="10-Run-AVG-Bandwith-Use" placeholder="10-Run-AVG-Bandwith-Use" step="any" required="required" />
+            
+            <label for="10-Run-Delay">10-Run-Delay:</label>
+            <input type="number" name="10-Run-Delay" placeholder="10-Run-Delay" step="any" required="required" />
+            
+            <label for="Node_Status">Node Status:</label>
+            <select name="Node_Status" required="required">
+                <option value="0">B = Behaving</option>
+                <option value="1">NB = Not Behaving</option>
+                <option value="2">P NB = Potentially Not Behaving</option>
+            </select>
+            
+            <label for="Flood_Status">Flood Status:</label>
+            <input type="number" name="Flood_Status" placeholder="Flood Status" step="any" required="required" />
+            
+            <button type="submit" class="btn btn-primary btn-block btn-large">Predict</button>
+    </form>
+            {% if prediction_text %}
+          <div class="output">
+               <h2>{{ prediction_text }}</h2>
+          </div>
+                    {% endif %}
+    </div>
+     <img src="https://ipcisco.com/wp-content/uploads/2020/03/cyber-attacks-network-attacks-ipcisco.com_-835x500.png" alt="Cancer Cells" class="added-image">
+        <div class="image-label">
+            <p><strong>Class-0</strong>  <strong>NB-No Block</strong></p>
+            <p><strong>Class-1</strong>  <strong>Block</strong></p>
+            <p><strong>Class-2</strong>  <strong>No Block</strong></p>
+            <p><strong>Class-3</strong>  <strong>NB-Wait</strong></p>            
+        </div>
+</body>
+</html>
